@@ -27,29 +27,29 @@ function processData(data) {
     let temp_C = Math.round(data.main.temp - 273);
     let temp_F = Math.round((temp_C * (9/5)) + 32);
 
-    document.getElementById("tempCel").innerText = "Current Temperature: " + temp_C + "\xB0" + "C";
-    document.getElementById("tempFar").innerText = "Current Temperature: " + temp_F + "\xB0" + "F";
+    document.getElementById("tempCel").innerText = temp_C + "\xB0" + "C";
+    document.getElementById("tempFar").innerText = temp_F + "\xB0" + "F";
 
     let maxtemp_C = Math.round(data.main.temp_max - 273);
     let maxtemp_F = Math.round((maxtemp_C * (9/5)) + 32);
 
-    document.getElementById("maxtempCel").innerText = "Max Temperature: " + maxtemp_C + "\xB0" + "C";
-    document.getElementById("maxtempFar").innerText = "Max Temperature: " + maxtemp_F + "\xB0" + "F";
+    document.getElementById("maxtempCel").innerText = maxtemp_C + "\xB0" + "C";
+    document.getElementById("maxtempFar").innerText = maxtemp_F + "\xB0" + "F";
 
     let mintemp_C = Math.round(data.main.temp_min - 273);
     let mintemp_F = Math.round((mintemp_C * (9/5)) + 32);
 
-    document.getElementById("mintempCel").innerText = "Min Temperature: " + mintemp_C + "\xB0" + "C";
-    document.getElementById("mintempFar").innerText = "Min Temperature: " + mintemp_F + "\xB0" + "F";
+    document.getElementById("mintempCel").innerText = mintemp_C + "\xB0" + "C";
+    document.getElementById("mintempFar").innerText = mintemp_F + "\xB0" + "F";
 
     let feelslike_C = Math.round(data.main.feels_like - 273);
     let feelslike_F = Math.round((feelslike_C * (9/5)) + 32);
 
-    document.getElementById("feelslikeCel").innerText = "Feels Like: " + feelslike_C + "\xB0" + "C";
-    document.getElementById("feelslikeFar").innerText = "Feels Like: " + feelslike_F + "\xB0" + "F";
+    document.getElementById("feelslikeCel").innerText = feelslike_C + "\xB0" + "C";
+    document.getElementById("feelslikeFar").innerText = feelslike_F + "\xB0" + "F";
 
-    document.getElementById("humidity").innerText = "Humidity: " + data.main.humidity + "%";
-    document.getElementById("pressure").innerText = "Pressure: " + data.main.pressure + " hPa";
+    document.getElementById("humidity").innerText = data.main.humidity + "%";
+    document.getElementById("pressure").innerText = data.main.pressure + " hPa";
 
     document.getElementById("city").innerText = data.name + ", " + data.sys.country;
 }
@@ -58,12 +58,13 @@ function processData(data) {
 function createDisplay() {
     const displayDiv = document.createElement("div");
     displayDiv.id = "displayDiv";
+    displayDiv.style.display = "none";
 
     const countryDiv = document.createElement("div");
     countryDiv.id = "countryDiv";
     displayDiv.appendChild(countryDiv);
 
-    const city = document.createElement("h2");
+    const city = document.createElement("h1");
     city.id = "city";
     countryDiv.appendChild(city);
 
@@ -71,49 +72,101 @@ function createDisplay() {
     tempDiv.id = "tempDiv";
     displayDiv.appendChild(tempDiv);
 
+    const tempInfo = document.createElement("h4");
+    tempInfo.innerText = "Current Temp:"
+    tempInfo.classList.add("info");
+    tempInfo.id = "tempInfo";
+    tempDiv.appendChild(tempInfo);
+
+    const maxtempInfo = document.createElement("h4");
+    maxtempInfo.innerText = "Max Temp:";
+    maxtempInfo.classList.add("info");
+    maxtempInfo.id = "maxtempInfo";
+    tempDiv.appendChild(maxtempInfo);
+
+    const mintempInfo = document.createElement("h4");
+    mintempInfo.innerText = "Min Temp:";
+    mintempInfo.classList.add("info");
+    mintempInfo.id = "mintempInfo";
+    tempDiv.appendChild(mintempInfo);
+
+    const feelslikeInfo = document.createElement("h4");
+    feelslikeInfo.innerText = "Feels Like:";
+    feelslikeInfo.classList.add("info");
+    feelslikeInfo.id = "feelslikeInfo";
+    tempDiv.appendChild(feelslikeInfo);
+
+    const humidityInfo = document.createElement("h4");
+    humidityInfo.innerText = "Humidity:";
+    humidityInfo.classList.add("info");
+    humidityInfo.id = "humidityInfo";
+    tempDiv.appendChild(humidityInfo);
+    
+    const pressureInfo = document.createElement("h4");
+    pressureInfo.innerText = "Pressure:";
+    pressureInfo.classList.add("info");
+    pressureInfo.id = "pressureInfo";
+    tempDiv.appendChild(pressureInfo);
+
     const tempCel = document.createElement("h2");
     tempCel.id = "tempCel";
+    tempCel.classList.add = "winfo";
     tempDiv.appendChild(tempCel);
 
     const tempFar = document.createElement("h2");
     tempFar.id = "tempFar";
+    tempFar.classList.add = "winfo";
+    tempFar.style.display = "none";
     tempDiv.appendChild(tempFar);
 
     const maxtempCel = document.createElement("h2");
     maxtempCel.id = "maxtempCel";
+    maxtempCel.classList.add = "winfo";
     tempDiv.appendChild(maxtempCel);
 
     const maxtempFar = document.createElement("h2");
     maxtempFar.id = "maxtempFar";
+    maxtempFar.classList.add = "winfo";
+    maxtempFar.style.display = "none";
     tempDiv.appendChild(maxtempFar);
 
     const mintempCel = document.createElement("h2");
     mintempCel.id = "mintempCel";
+    mintempCel.classList.add = "winfo";
     tempDiv.appendChild(mintempCel);
 
     const mintempFar = document.createElement("h2");
     mintempFar.id = "mintempFar";
+    mintempFar.classList.add = "winfo";
+    mintempFar.style.display = "none";
     tempDiv.appendChild(mintempFar);
 
     const feelslikeCel = document.createElement("h2");
     feelslikeCel.id = "feelslikeCel";
+    feelslikeCel.classList.add = "winfo";
     tempDiv.appendChild(feelslikeCel);
 
     const feelslikeFar = document.createElement("h2");
     feelslikeFar.id = "feelslikeFar";
+    feelslikeFar.classList.add = "winfo";
+    feelslikeFar.style.display = "none";
     tempDiv.appendChild(feelslikeFar);
 
     const humidity = document.createElement("h2");
     humidity.id = "humidity";
+    humidity.classList.add = "winfo";
     tempDiv.appendChild(humidity);
 
     const pressure = document.createElement("h2");
     pressure.id = "pressure";
+    pressure.classList.add = "winfo";
     tempDiv.appendChild(pressure);
 
     const switchLabel = document.createElement("label");
     switchLabel.classList.add("switch");
-    tempDiv.appendChild(switchLabel);
+    switchLabel.id = "switchLabel";
+    switchLabel.style.display = "none";
+    countryDiv.appendChild(switchLabel);
 
     const switchInput = document.createElement("input");
     switchInput.type = "checkbox";
@@ -130,6 +183,8 @@ function addLocation() {
     let searchLocation = searchBar.value;
     getData(searchLocation);
     searchBar.value = "";
+    document.getElementById("switchLabel").style.display = "inline-block";
+    document.getElementById("displayDiv").style.display = "block";
 }
 
 function pageLoad() {
