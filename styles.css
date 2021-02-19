@@ -7,12 +7,25 @@ html {
     color: white;
 }
 
+.templabel {
+    position: absolute;
+    top: 56px;
+}
+
+#switchtwo {
+    right: 36px;
+}
+
+#switchone {
+    right: 115px;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: absolute;
-    display: inline-block;
+    display: block;
     right: 50px;
-    top: 50px;
+    top: 70px;
     width: 60px;
     height: 34px;
 }
@@ -80,6 +93,11 @@ h4 {
     color: white;
 }
 
+h5 {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
 #countryDiv {
     border-bottom: 3px solid white;
 }
@@ -118,5 +136,9 @@ h4 {
 #searchButton:hover {
     transition: ease 1s;
     background-color: white;
+    color: black;
+}
+
+::placeholder {
     color: black;
 }

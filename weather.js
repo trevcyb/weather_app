@@ -1,5 +1,5 @@
 async function getData(location) {
-    const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=dee9342929355286f7f022bb65617466", {mode: 'cors'});
+    const response = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&APPID=dee9342929355286f7f022bb65617466", { mode: 'cors' });
     const w_data = await response.json();
     console.log(w_data);
     processData(w_data);
@@ -11,6 +11,7 @@ function createForm() {
 
     const searchBar = document.createElement("input");
     searchBar.id = "searchBar";
+    searchBar.placeholder = "Search a town";
     formDiv.appendChild(searchBar);
 
     const searchButton = document.createElement("button");
@@ -25,25 +26,25 @@ function createForm() {
 
 function processData(data) {
     let temp_C = Math.round(data.main.temp - 273);
-    let temp_F = Math.round((temp_C * (9/5)) + 32);
+    let temp_F = Math.round((temp_C * (9 / 5)) + 32);
 
     document.getElementById("tempCel").innerText = temp_C + "\xB0" + "C";
     document.getElementById("tempFar").innerText = temp_F + "\xB0" + "F";
 
     let maxtemp_C = Math.round(data.main.temp_max - 273);
-    let maxtemp_F = Math.round((maxtemp_C * (9/5)) + 32);
+    let maxtemp_F = Math.round((maxtemp_C * (9 / 5)) + 32);
 
     document.getElementById("maxtempCel").innerText = maxtemp_C + "\xB0" + "C";
     document.getElementById("maxtempFar").innerText = maxtemp_F + "\xB0" + "F";
 
     let mintemp_C = Math.round(data.main.temp_min - 273);
-    let mintemp_F = Math.round((mintemp_C * (9/5)) + 32);
+    let mintemp_F = Math.round((mintemp_C * (9 / 5)) + 32);
 
     document.getElementById("mintempCel").innerText = mintemp_C + "\xB0" + "C";
     document.getElementById("mintempFar").innerText = mintemp_F + "\xB0" + "F";
 
     let feelslike_C = Math.round(data.main.feels_like - 273);
-    let feelslike_F = Math.round((feelslike_C * (9/5)) + 32);
+    let feelslike_F = Math.round((feelslike_C * (9 / 5)) + 32);
 
     document.getElementById("feelslikeCel").innerText = feelslike_C + "\xB0" + "C";
     document.getElementById("feelslikeFar").innerText = feelslike_F + "\xB0" + "F";
@@ -101,7 +102,7 @@ function createDisplay() {
     humidityInfo.classList.add("info");
     humidityInfo.id = "humidityInfo";
     tempDiv.appendChild(humidityInfo);
-    
+
     const pressureInfo = document.createElement("h4");
     pressureInfo.innerText = "Pressure:";
     pressureInfo.classList.add("info");
@@ -170,11 +171,45 @@ function createDisplay() {
 
     const switchInput = document.createElement("input");
     switchInput.type = "checkbox";
+    switchInput.addEventListener("change", () => {
+        if (switchInput.checked) {
+            tempCel.style.display = "none";
+            maxtempCel.style.display = "none";
+            mintempCel.style.display = "none";
+            feelslikeCel.style.display = "none";
+            tempFar.style.display = "block";
+            maxtempFar.style.display = "block";
+            mintempFar.style.display = "block";
+            feelslikeFar.style.display = "block";
+        } else {
+            tempCel.style.display = "block";
+            maxtempCel.style.display = "block";
+            mintempCel.style.display = "block";
+            feelslikeCel.style.display = "block";
+            tempFar.style.display = "none";
+            maxtempFar.style.display = "none";
+            mintempFar.style.display = "none";
+            feelslikeFar.style.display = "none";
+        }
+    })
+
     switchLabel.appendChild(switchInput);
 
     const sliderSpan = document.createElement("span");
     sliderSpan.classList.add("slider");
     switchLabel.appendChild(sliderSpan);
+
+    const switchone = document.createElement("h5");
+    switchone.innerText = "C";
+    switchone.classList.add("templabel");
+    switchone.id = "switchone";
+    countryDiv.appendChild(switchone);
+
+    const switchtwo = document.createElement("h5");
+    switchtwo.innerText = "F";
+    switchtwo.classList.add("templabel");
+    switchtwo.id = "switchtwo";
+    countryDiv.appendChild(switchtwo);
 
     return displayDiv;
 }
